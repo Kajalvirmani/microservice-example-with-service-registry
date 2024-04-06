@@ -1,0 +1,36 @@
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/orderdb
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update # You can change this to your desired value (e.g., create, update, none)
+    show-sql: true # Set to true to see SQL statements in logs
+  application:
+    name: ORDER-SERVICE
+  config:
+    import: configserver:http://localhost:9296
+  zipkin:
+    base-url: http://localhost:9411/
+
+server:
+  port: 8085 # Change to the desired port for your Spring Boot application
+
+logging:
+  level:
+    root: INFO # Adjust log levels as needed for your application
+  pattern:
+    level: '%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]'
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
