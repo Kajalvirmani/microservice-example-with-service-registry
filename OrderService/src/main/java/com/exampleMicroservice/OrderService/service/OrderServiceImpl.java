@@ -86,6 +86,7 @@ public class OrderServiceImpl implements OrderService {
 //                        "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
 //                PaymentResponse.class
 //                );
+        // check why not working together
          OrderResponse.ProductDetails productDetails
                  = OrderResponse.ProductDetails.builder()
                  .productName(productResponse.getProductName())
