@@ -14,8 +14,39 @@ spring:
     name: ORDER-SERVICE
   config:
     import: configserver:http://localhost:9296
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-21624739.okta.com/oauth2/default
+      client:
+        registration:
+          internal-client:
+            provider: okta
+            authorization-grant-type: client_credentials
+            scope: internal
+            client-id: 0oagdai59le4bO7JD5d7
+            client-secret: H7lHBfYj4Wx2UJMxWRRuT0vKkVcPSSO62uVI4F_hIa8z6cfn3iIqe2nIRwgDpO8S
+          provider:
+            okta:
+              issuer-uri: https://dev-21624739.okta.com/oauth2/default
   zipkin:
     base-url: http://localhost:9411/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      external:
+        event-consumer-buffer-size: 10
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-size: 10
+        sliding-window-type: COUNT_BASED
+
+
 
 server:
   port: 8085 # Change to the desired port for your Spring Boot application

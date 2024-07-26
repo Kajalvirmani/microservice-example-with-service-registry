@@ -78,21 +78,21 @@ public class OrderServiceImpl implements OrderService {
         Order order= orderRepository.findById(orderId).orElseThrow(
                 ()-> new CustomException("order not found","NOT_FOUND",404)
         );
-         ProductResponse productResponse= restTemplate.getForObject(
-                 "http://PRODUCT-SERVICE/product/"+ order.getProductId(),ProductResponse.class
-         );
+//         ProductResponse productResponse= restTemplate.getForObject(
+//                 "http://PRODUCT-SERVICE/product/"+ order.getProductId(),ProductResponse.class
+//         );
 //         PaymentResponse paymentResponse
 //                = restTemplate.getForObject(
 //                        "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
 //                PaymentResponse.class
 //                );
-         OrderResponse.ProductDetails productDetails
-                 = OrderResponse.ProductDetails.builder()
-                 .productName(productResponse.getProductName())
-                 .productId(productResponse.getProductId())
-                 .price(productResponse.getPrice())
-                 .quantity(productResponse.getQuantity())
-                 .build();
+//         OrderResponse.ProductDetails productDetails
+//                 = OrderResponse.ProductDetails.builder()
+//                 .productName(productResponse.getProductName())
+//                 .productId(productResponse.getProductId())
+//                 .price(productResponse.getPrice())
+//                 .quantity(productResponse.getQuantity())
+//                 .build();
 //         OrderResponse.PaymentDetails paymentDetails= OrderResponse.PaymentDetails
 //                 .builder()
 //                 .paymentId(paymentResponse.getPaymentId())
@@ -104,9 +104,8 @@ public class OrderServiceImpl implements OrderService {
                 .orderStatus(order.getOrderStatus())
                 .amount(order.getOrderAmount())
                 .orderDate(order.getOrderDate())
-                .productDetails(productDetails)
                 .build();
-
+//                .productDetails(productDetails)
         return orderResponse;
     }
 }
