@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry
+#it is for deployment
+spec:
+  #configuration about the pods
+  selector:
+    matchLabels:
+      app: service-registry
+  template:
+    metadata:
+      labels:
+        app: service-registry
+      #it is for pod
+    spec:
+      containers:
+        - name: service-registry
+          image: kajalv/service-registry:latest
+          imagePullPolicy: Always
+          ports: 
+            - containerPort: 8761
